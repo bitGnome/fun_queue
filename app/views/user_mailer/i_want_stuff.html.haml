@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "rwzr/html", 'http-equiv' => "Content-Type"}
+  %body
+    %h1 Pretty sweet right?
+    #main
+      .hello= "Dear #{@user.name},"
+      .body This is the stuff that you wanted.
+      .good-bye xo, us
+      .footer= "Visit us at #{@url}"
