@@ -12,7 +12,8 @@ class HomeController < ApplicationController
     response[:text] = "Thanks check your email"
     response[:status] = 200
 
-    UserMailer.i_want_stuff(User.first).deliver
+    #Resque.enqueue(SendStuff, current_user.id)
+    Resque.enqueue(SendStuff, User.first.id)
 
     respond_to do |format|
       format.json { render :json => response.to_json }

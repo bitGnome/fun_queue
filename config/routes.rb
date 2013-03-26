@@ -7,4 +7,13 @@ FunQueue::Application.routes.draw do
   root :to => "home#index"
   devise_for :users
   resources :users
+
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate?
+  end
+
+  constraints resque_constraint do
+    mount Resque::Server, :at =>  "/resque"
+  end
+
 end
